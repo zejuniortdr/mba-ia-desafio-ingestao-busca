@@ -1,0 +1,32 @@
+[project]
+name = "ingestao-busca"
+version = "0.1.0"
+description = "Descrição do projeto"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.15.4",
+]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+indent-width = 4
+src = ["src"]
+
+[tool.ruff.lint]
+# Enable pycodestyle, Pyflakes, isort, flake8-comprehensions, and flake8-bugbear
+select = ["E", "W", "F", "I", "C", "B"]
+
+# Disable specific rules if needed, for example:
+# ignore = ["E501"]
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+
+# Enable docstring formatting
+docstring-code-format = true

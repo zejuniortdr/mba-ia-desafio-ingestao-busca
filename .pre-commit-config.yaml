@@ -1,0 +1,33 @@
+default_language_version:
+  python: python3
+
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+  - id: check-ast
+  - id: check-executables-have-shebangs
+  - id: check-json
+  - id: check-merge-conflict
+  - id: check-symlinks
+  - id: check-vcs-permalinks
+  - id: check-xml
+  - id: debug-statements
+  - id: detect-private-key
+  - id: fix-byte-order-marker
+  - id: forbid-new-submodules
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.15.4
+  hooks:
+  -   id: ruff-check
+      args: [ --fix ]
+  -   id: ruff-format
+
+- repo: https://github.com/commit-check/commit-check
+  rev: v2.4.2
+  hooks:
+  - id: check-branch
+    always_run: true
