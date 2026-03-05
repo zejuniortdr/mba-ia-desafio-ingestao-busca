@@ -12,3 +12,7 @@ setup/dev:
 
 up:
 	docker compose up -d
+
+
+ingest:
+	python3 src/ingest.py
