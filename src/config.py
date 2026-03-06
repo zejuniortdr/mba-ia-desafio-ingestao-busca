@@ -24,3 +24,48 @@ CONNECTION_STRING = (
 PDF_PATH = "pdfs/document-short.pdf"
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 150
+
+
+def get_embeddings():
+    if LLM_PROVIDER == "gemini":
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+        return GoogleGenerativeAIEmbeddings(
+            model="models/gemini-embedding-001",
+            google_api_key=GOOGLE_API_KEY,
+        )
+    from langchain_openai import OpenAIEmbeddings
+
+    return OpenAIEmbeddings(
+        model="text-embedding-3-small",
+        openai_api_key=OPENAI_API_KEY,
+    )
+
+
+def get_llm():
+    if LLM_PROVIDER == "gemini":
+        from langchain_google_genai import ChatGoogleGenerativeAI
+
+        return ChatGoogleGenerativeAI(
+            model="gemini-2.5-flash-lite",
+            google_api_key=GOOGLE_API_KEY,
+            temperature=0,
+        )
+    from langchain_openai import ChatOpenAI
+
+    return ChatOpenAI(
+        model="gpt-4o-mini",
+        openai_api_key=OPENAI_API_KEY,
+        temperature=0,
+    )
+
+
+def get_vector_store(embeddings):
+    from langchain_postgres import PGVector
+
+    return PGVector(
+        embeddings=embeddings,
+        collection_name=PG_VECTOR_COLLECTION_NAME,
+        connection=CONNECTION_STRING,
+        use_jsonb=True,
+    )
