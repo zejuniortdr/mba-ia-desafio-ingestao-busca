@@ -54,7 +54,7 @@ jobs:
       - name: Run unit tests
         run: pytest tests/unit -v --tb=short
         env:
-          LLM_PROVIDER: LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
           OPENAI_API_KEY: sk-fake-key-for-unit-tests
           GOOGLE_API_KEY: fake-google-key-for-unit-tests
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
