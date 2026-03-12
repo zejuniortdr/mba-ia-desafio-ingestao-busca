@@ -54,13 +54,13 @@ jobs:
       - name: Run unit tests
         run: pytest tests/unit -v --tb=short
         env:
-          LLM_PROVIDER: openai
+          LLM_PROVIDER: LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
           OPENAI_API_KEY: sk-fake-key-for-unit-tests
           GOOGLE_API_KEY: fake-google-key-for-unit-tests
-          POSTGRES_HOST: localhost
-          POSTGRES_USER: raguser
-          POSTGRES_PASSWORD: ragpassword
-          POSTGRES_DB: ragdb
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
   integration-tests:
     name: Integration Tests
@@ -71,9 +71,10 @@ jobs:
       postgres:
         image: pgvector/pgvector:pg16
         env:
-          POSTGRES_USER: raguser
-          POSTGRES_PASSWORD: ragpassword
-          POSTGRES_DB: ragdb
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         ports:
           - 5432:5432
         options: >-
