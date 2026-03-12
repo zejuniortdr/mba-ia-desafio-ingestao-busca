@@ -21,3 +21,13 @@ ingest:
 
 chat:
 	python3 src/chat.py
+
+
+test:
+	venv/bin/pytest tests/unit -v
+
+test-integration:
+	venv/bin/pytest tests/integration -v
+
+test-all:
+	venv/bin/pytest tests/ -v --tb=short
