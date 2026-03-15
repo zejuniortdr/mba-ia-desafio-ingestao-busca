@@ -2,7 +2,7 @@
 # Makefile — PDF Chat RAG
 # ==============================================================================
 
-.PHONY: setup setup/dev up check-env ingest chat test test-integration test-all lint fmt
+.PHONY: envvars env setup setup/dev up check-env ingest chat test test-integration test-all lint fmt
 
 # ------------------------------------------------------------------------------
 # Setup
@@ -71,23 +71,23 @@ check-env:
 # ------------------------------------------------------------------------------
 
 ingest: check-env
-	python3 src/ingest.py
+	venv/bin/python3 src/ingest.py
 
 chat: check-env
-	python3 src/chat.py
+	venv/bin/python3 src/chat.py
 
 # ------------------------------------------------------------------------------
 # Testes
 # ------------------------------------------------------------------------------
 
 test:
-	venv/bin/pytest tests/unit -v
+	venv/bin/pytest tests/unit -v -p no:warnings
 
 test-integration:
-	venv/bin/pytest tests/integration -v
+	venv/bin/pytest tests/integration -v -p no:warnings
 
 test-all:
-	venv/bin/pytest tests/ -v --tb=short
+	venv/bin/pytest tests/ -v -p no:warnings --tb=short
 
 # ------------------------------------------------------------------------------
 # Qualidade de Código
