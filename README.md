@@ -69,39 +69,20 @@ Você também precisará de **ao menos uma** das seguintes API Keys:
 ### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositorio>
-cd <nome-do-repositorio>
+git clone git@github.com:zejuniortdr/mba-ia-desafio-ingestao-busca.git
+cd mba-ia-desafio-ingestao-busca
 ```
 
-### 2. Configurar as variáveis de ambiente
+### 2. Adicionar o documento PDF
 
-```bash
-# Copiar o arquivo de exemplo
-cp .env.example .env
-```
+Na pasta `pdfs/` existem dois arquivos:
+- document.pdf (original)
+- document-short.pdf (primeira página do original, para otimizar performance durante os testes)
 
-Abra o arquivo `.env` e preencha **todas** as variáveis obrigatórias:
+Edite o .env no passo 4 para refletir o arquivo correto que queira executar.
 
-```bash
-# Editor de sua preferência
-nano .env
-# ou
-code .env
-```
 
-> ⚠️ **Atenção:** Os comandos `ingest` e `chat` verificam automaticamente se o `.env`
-> está corretamente preenchido antes de executar. Nenhuma variável pode estar vazia.
-
-### 3. Adicionar o documento PDF
-
-```bash
-# Copie seu PDF para a raiz do projeto com o nome esperado
-cp /caminho/para/seu/arquivo.pdf ./document.pdf
-```
-
-> O arquivo deve se chamar `document.pdf` e estar na raiz do projeto.
-
-### 4. Criar o ambiente virtual e instalar dependências
+### 3. Criar o ambiente virtual e instalar dependências
 
 ```bash
 # Ambiente de produção
@@ -115,6 +96,19 @@ Isso irá:
 - Criar o `venv/` com Python 3
 - Atualizar o `pip`
 - Instalar todas as dependências do `requirements.txt` (ou `requirements-dev.txt`)
+
+
+### 4. Configurar as variáveis de ambiente
+
+O setup acima já copia as variáveis de ambiente do arquivo de exemplo para o .env. Abrá-o e edite as keys necessárias.
+
+O preenchimento de **todas** as variáveis são obrigatórias.
+
+
+> ⚠️ **Atenção:** Os comandos `ingest` e `chat` verificam automaticamente se o `.env`
+> está corretamente preenchido antes de executar. Nenhuma variável pode estar vazia.
+
+
 
 ### 5. Subir o banco de dados (pgVector)
 
@@ -140,12 +134,19 @@ make ingest
 
 Este comando irá:
 1. Verificar se todas as variáveis do `.env` estão preenchidas
-2. Carregar e fazer o chunking do `document.pdf`
+2. Carregar e fazer o chunking do PDF definido no `.env`
 3. Gerar embeddings via API (OpenAI ou Gemini)
 4. Persistir os vetores no pgVector
 
 > A ingestão precisa ser executada **apenas uma vez** por documento.
-> Para trocar o documento, remova os dados do banco e ingeste novamente.
+
+#### Para trocar o documento, remova os dados do banco e ingeste novamente.
+
+```bash
+make clean/db
+```
+
+O comando acima vai fazer um drop do volume do banco no container e será necessário subí-lo novamente.
 
 ### 7. Iniciar o chat
 

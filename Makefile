@@ -2,7 +2,7 @@
 # Makefile — PDF Chat RAG
 # ==============================================================================
 
-.PHONY: envvars env setup setup/dev up check-env ingest chat test test-integration test-all lint fmt
+.PHONY: envvars env setup setup/dev up check-env ingest chat test test-integration test-all lint fmt down clean/db
 
 # ------------------------------------------------------------------------------
 # Setup
@@ -28,6 +28,14 @@ setup/dev: env envvars
 
 up:
 	docker compose up -d
+
+
+down:
+	docker compose down
+
+
+clean/db:
+	docker compose down -v
 
 # ------------------------------------------------------------------------------
 # Validação do .env
