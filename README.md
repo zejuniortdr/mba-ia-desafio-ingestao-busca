@@ -167,12 +167,23 @@ Para encerrar o chat, pressione `Ctrl+C` ou `Ctrl+D`.
 
 Descrição de cada variável disponível no `.env.example`:
 
-| Variável           | Obrigatória | Descrição                                              |
-|--------------------|-------------|--------------------------------------------------------|
-| `LLM_PROVIDER`     | ✅ Sim       | Provedor do LLM: `openai` ou `gemini`                  |
-| `OPENAI_API_KEY`   | Condicional | Obrigatória se `LLM_PROVIDER=openai`                   |
-| `GOOGLE_API_KEY`   | Condicional | Obrigatória se `LLM_PROVIDER=gemini`                   |
-| `DATABASE_URL`     | ✅ Sim       | URL de conexão com o PostgreSQL (ex: `postgresql://...`)|
+| Variável                      | Obrigatória   | Descrição                                 |
+|-------------------------------|---------------|-------------------------------------------|
+| `LLM_PROVIDER`                | ✅ Sim        | Provedor do LLM: `openai` ou `gemini`     |
+| `OPENAI_API_KEY`              | Condicional   | Obrigatória se `LLM_PROVIDER=openai`      |
+| `OPENAI_MODEL`                | Condicional   | Obrigatória se `LLM_PROVIDER=openai`      |
+| `OPENAI_EMBEDDING_MODEL`      | Condicional   | Obrigatória se `LLM_PROVIDER=openai`      |
+| `GOOGLE_API_KEY`              | Condicional   | Obrigatória se `LLM_PROVIDER=gemini`      |
+| `GEMINI_MODEL`                | Condicional   | Obrigatória se `LLM_PROVIDER=gemini`      |
+| `GEMINI_EMBEDDING_MODEL`      | Condicional   | Obrigatória se `LLM_PROVIDER=gemini`      |
+| `POSTGRES_USER`               | ✅ Sim        | Usuário do banco postgres                 |
+| `POSTGRES_PASSWORD`           | ✅ Sim        | Senha do usuário acima no banco postgres  |
+| `POSTGRES_DB`                 | ✅ Sim        | Nome do database                          |
+| `POSTGRES_HOST`               | ✅ Sim        | Host do banco                             |
+| `POSTGRES_PORT`               | ✅ Sim        | Porta do banco                            |
+| `COLLECTION_NAME`             | ✅ Sim        | Nome da collection utilizada              |
+| `PDF_PATH`                    | ✅ Sim        | Path do arquivo que será trabalhado       |
+
 
 ### Usando Google Gemini (padrão)
 
