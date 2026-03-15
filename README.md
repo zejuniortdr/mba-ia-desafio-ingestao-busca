@@ -209,31 +209,38 @@ make test-all
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 .
-├── docker-compose.yml        # Configuração do PostgreSQL + pgVector
-├── requirements.txt          # Dependências de produção
-├── requirements-dev.txt      # Dependências de desenvolvimento (lint, testes)
-├── pyproject.toml            # Configuração do projeto e ferramentas (ruff)
-├── Makefile                  # Automação de tarefas
-├── .env.example              # Template das variáveis de ambiente
-├── .env                      # Variáveis de ambiente (NÃO commitar)
-├── document.pdf              # PDF para ingestão (NÃO commitar)
+├── .github
+│   └── .workflows
+│       └── tests.yml         # Action do Github para rodar os testes
+├── pdfs                      # Pasta onde estão os arquivos pdf
+│   ├── document-short.pdf    # Documento só com a primeira página para otimizar performance
+│   └── document.pdf          # Documento original do desafio
 ├── src/
 │   ├── config.py             # Settings via pydantic-settings e factories de LLM
 │   ├── ingest.py             # Pipeline de ingestão: load → chunk → embed → store
 │   ├── search.py             # Busca semântica direta (sem geração)
 │   └── chat.py               # Interface CLI do chat RAG
-└── tests/
-    ├── unit/                 # Testes unitários (sem dependências externas)
-    └── integration/          # Testes de integração (requerem DB e API)
+├── tests/
+│    ├── unit/                # Testes unitários (sem dependências externas)
+│    └── integration/         # Testes de integração (requerem DB e API)
+├── .env.example              # Template das variáveis de ambiente
+├── .gitignore
+├── .pre-commit-config.yaml   # Configuração do pre-commit
+├── .python-version           # Configuração da versão do python
+├── docker-compose.yml        # Configuração do PostgreSQL + pgVector
+├── Makefile                  # Automação de tarefas
+├── pyproject.toml            # Configuração do projeto e ferramentas (ruff)
+├── requirements.txt          # Dependências de produção
+└── requirements-dev.txt      # Dependências de desenvolvimento (lint, testes)
 ```
 
 ---
 
-## 💬 Exemplo de Uso
+## Exemplo de Uso
 
 ```
 $ make chat
@@ -267,23 +274,6 @@ venv/bin/ruff format src/
 
 Configurações definidas no `pyproject.toml`: linha de 88 caracteres, aspas duplas, regras E, W, F, I, C, B habilitadas.
 
----
-
-## Checklist de Entrega — MBA
-
-Antes de submeter o trabalho, verifique:
-
-- [x] Arquivo `.env.example` presente e com todas as variáveis documentadas
-- [x] Arquivo `.env` **não** versionado (presente no `.gitignore`)
-- [x] Arquivo `document.pdf` **não** versionado (presente no `.gitignore`)
-- [x] `make setup` executado com sucesso em ambiente limpo
-- [x] `make up` inicia o banco sem erros
-- [x] `make ingest` conclui sem erros
-- [x] `make chat` responde perguntas corretamente
-- [x] `make test-all` passa sem falhas
-- [x] README revisado e coerente com o projeto entregue
-
----
 
 ## Licença
 
