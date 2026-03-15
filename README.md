@@ -190,15 +190,13 @@ Descrição de cada variável disponível no `.env.example`:
 ```dotenv
 LLM_PROVIDER=gemini
 GOOGLE_API_KEY=AIza...
-DATABASE_URL=postgresql://user:password@localhost:5432/ragdb
+```
 
 ### Usando OpenAI
 
 ```dotenv
 LLM_PROVIDER=openai
 OPENAI_API_KEY=sk-...
-DATABASE_URL=postgresql://user:password@localhost:5432/ragdb
-```
 ```
 
 ---
